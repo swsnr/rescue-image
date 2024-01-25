@@ -13,6 +13,12 @@ from pathlib import Path
 
 
 BUILDROOT = Path(os.environ['BUILDROOT'])
+MODDIR = BUILDROOT / 'usr' / 'lib' / 'modules'
+
+
+ALLOWED_MODULES = {
+    'ext4',
+}
 
 
 def loaded_modules() -> set[str]:
@@ -21,18 +27,26 @@ def loaded_modules() -> set[str]:
         return {line.split()[0] for line in source}
 
 
-def cleanup_modules(whitelist: set[str]) -> None:
+def modname(path: Path) -> str:
+    return path.stem.rstrip('.ko')
+
+
+def virtio_drivers() -> set[str]:
+    """Get everything associated w/ virtio."""
+    return set(modname(f) for f in MODDIR.glob('**/*.ko'))
+
+
+def cleanup_modules(allowed_modules: set[str]) -> None:
     """Remove all modules not in the whitelist."""
-    mod_dir = BUILDROOT / 'usr' / 'lib' / 'modules'
-    for mod_file in mod_dir.glob('**/*.ko.*'):
-        module_name = mod_file.stem.rstrip('.ko')
-        if module_name not in whitelist:
+    for mod_file in MODDIR.glob('**/*.ko.*'):
+        if modname(mod_file) not in allowed_modules:
             mod_file.unlink(missing_ok=True)
 
 
 def prepare_final() -> None:
-    print('Removing all kernel modules not loaded in host system')
-    cleanup_modules(loaded_modules())
+    allowed = ALLOWED_MODULES | loaded_modules() | virtio_drivers()
+    print('Removing all disallowed modules')
+    cleanup_modules(allowed)
 
 
 def main() -> None:
