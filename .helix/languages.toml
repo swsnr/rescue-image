@@ -1,0 +1,9 @@
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[[language]]
+name = "python"
+formatter = { command = "ruff", args = ["check", "--fix-only", "-"] }
+auto-format = true
+language-servers = [ "pyright" ]
