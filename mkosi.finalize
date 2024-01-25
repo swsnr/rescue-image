@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+
+"""
+Finalize the image.
+
+Specifically, remove redundant firmware files which are not required by any
+embedded module.
+"""
+
+
+import os
+from pathlib import Path
+from subprocess import run, PIPE
+
+
+BUILDROOT = Path(os.environ['BUILDROOT'])
+
+
+def collect_module_firmware_files() -> set[str]:
+    mod_dir = BUILDROOT / 'usr' / 'lib' / 'modules'
+    cmd = ['modinfo', '-F', 'firmware', '-0', *mod_dir.glob('**/*.ko.*')]
+    output = run(cmd, check=True, stdout=PIPE, text=True).stdout.split('\0')
+    return {firmware for firmware in output if firmware}
+
+
+def cleanup_redundant_firmware_files():
+    firmware_dir = (BUILDROOT / 'usr' / 'lib' / 'firmware').resolve()
+    required_files = {firmware_dir / firmware for firmware in collect_module_firmware_files()}
+    required_files.update(f.resolve() for f in required_files)
+    # Walk all files and delete everything that's not required
+    for child in firmware_dir.glob("**/*"):
+        if child.is_dir():
+            continue
+        if child in required_files or child.with_suffix('') in required_files:
+            print(f'Keeping {child}')
+            continue
+        child.unlink(missing_ok=True)
+
+
+def main() -> None:
+    print('Removing all firmware files not required by any module present in the image')
+    cleanup_redundant_firmware_files()
+
+
+if __name__ == '__main__':
+    main()
