@@ -1,0 +1,6 @@
+NAME="Arch Linux Rescue (swsnr/dotfiles)"
+PRETTY_NAME="Arch Linux Rescue (swsnr/dotfiles)"
+ID=arch-rescue
+HOME_URL="https://github.com/swsnr/dotfiles"
+VENDOR_NAME=swsnr
+VENDOR_URL=https://swsnr.de
