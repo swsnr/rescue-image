@@ -38,6 +38,12 @@ def cleanup_redundant_firmware_files():
         if child in required_files or child.with_suffix('') in required_files:
             print(f'Keeping {child}')
             continue
+        # Retain supplemental firmware files for iwlwifi.  Ideally we'd be clever
+        # and only include those belonging to a required ucode firmware, but these
+        # files are really really small so it won't hurt to just include them all
+        if child.match('*.pnvm.*'):
+            print(f'Keeping {child}')
+            continue
         child.unlink(missing_ok=True)
 
 
