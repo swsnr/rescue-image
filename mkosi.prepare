@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+'''
+Prepare the image.
+'''
+
+import os
+import sys
+from pathlib import Path
+
+
+BUILDROOT = Path(os.environ['BUILDROOT'])
+
+
+def loaded_modules() -> set[str]:
+    """Get all modules loaded on the host."""
+    with open('/proc/modules', 'r') as source:
+        return {line.split()[0] for line in source}
+
+
+def cleanup_modules(whitelist: set[str]) -> None:
+    """Remove all modules not in the whitelist."""
+    mod_dir = BUILDROOT / 'usr' / 'lib' / 'modules'
+    for mod_file in mod_dir.glob('**/*.ko.*'):
+        module_name = mod_file.stem.rstrip('.ko')
+        if module_name not in whitelist:
+            mod_file.unlink(missing_ok=True)
+
+
+def prepare_final() -> None:
+    print('Removing all kernel modules not loaded in host system')
+    cleanup_modules(loaded_modules())
+
+
+def main() -> None:
+    if sys.argv[1] == 'final':
+        prepare_final()
+
+
+if __name__ == '__main__':
+    main()
