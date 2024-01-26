@@ -1,4 +1,4 @@
-NAME="Arch Rescue"
+NAME="Arch Linux"
 ID=arch
 VARIANT="Rescue Image"
 VARIANT_ID=rescue
