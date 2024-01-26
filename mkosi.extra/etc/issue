@@ -3,8 +3,8 @@ Welcome to \S.
 See \S{HOME_URL} for more information.
 See \S{DOCUMENTATION_URL} for documentation.
 
-Wired ethernet interfaces are connected via DHCP automatically.
-For wireless interfaces, connect via iwctl:
+systemd-networkd automatically configures ethernet and wlan station interfaces
+with DHCP.  For wlan0 interfaces, you first need to connect via iwctl:
 
     [iwd]# device list
     [iwd]# station \e{green}device\e{reset} scan
