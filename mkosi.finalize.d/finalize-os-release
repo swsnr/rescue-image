@@ -5,4 +5,3 @@
 
 source "${BUILDROOT}/etc/os-release"
 echo "PRETTY_NAME=\"${NAME} (${VARIANT} ${IMAGE_VERSION:-n/a})\"" >> "${BUILDROOT}/etc/os-release"
-cat "${BUILDROOT}/etc/os-release"
