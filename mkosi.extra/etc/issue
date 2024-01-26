@@ -15,7 +15,8 @@ This image comes with a number of tools, including ripgrep, broot, nano, etc.
 The default shell is fish, the Friendly Interactive Shell.
 
 Once network connectivity is established you can install additional packages
-with pacman -S.
+with pacman -S.  The default mirrorlist use world-wide geo-locating mirrors;
+install reflector to create a mirrorlist with local mirrors.
 
 Good luck with recovery :)
 
