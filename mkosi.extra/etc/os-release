@@ -1,6 +1,9 @@
-NAME="Arch Linux Rescue (swsnr/dotfiles)"
-PRETTY_NAME="Arch Linux Rescue (swsnr/dotfiles)"
-ID=arch-rescue
-HOME_URL="https://github.com/swsnr/dotfiles"
-VENDOR_NAME=swsnr
-VENDOR_URL=https://swsnr.de
+NAME="Arch Rescue"
+ID=arch
+VARIANT="Rescue Image"
+VARIANT_ID=rescue
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://github.com/swsnr/arch-rescue-image"
+DOCUMENTATION_URL="https://github.com/swsnr/arch-rescue-image"
+BUG_REPORT_URL="https://github.com/swsnr/arch-rescue-image/issues"
