@@ -28,7 +28,7 @@ Alternatively,
 Then, build the image:
 
 ```console
-$ mkosi --image-version="$(git rev-parse --short=10 HEAD)-(date --utc +%Y%m%d)"
+$ mkosi --image-version="$(git rev-parse --short=10 HEAD)-(date --utc +%Y%m%d%H%M)"
 ```
 
 You can pick whatever `image-version` you want as long as it helps you understand how and when you built the image.
