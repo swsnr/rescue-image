@@ -3,5 +3,12 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+echo "Restoring supplemental iwlwifi firmware files"
+# See `mkosi.prepare` and https://github.com/systemd/mkosi/issues/2334
+rsync -mar "${BUILDROOT}/usr/lib/saved-firmware/" \
+            "${BUILDROOT}/usr/lib/firmware"
+rm -rf "${BUILDROOT}/usr/lib/saved-firmware/"
+
+echo "Finalizing /etc/os-release"
 source "${BUILDROOT}/etc/os-release"
 echo "PRETTY_NAME=\"${NAME} (${VARIANT} ${IMAGE_VERSION:-n/a})\"" >> "${BUILDROOT}/etc/os-release"
