@@ -2,9 +2,11 @@
 
 A mostly minimal and opinionated `mkosi` UKI image for use as rescue image for Arch Linux.
 
+See https://swsnr.de/archlinux-rescue-image-with-mkosi
+
 ## Why?
 
-Arch breaks at whiles.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
+Every once in a while Arch breaks.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
 
 With this image, you don't need to.  Put the image on your EFI, and boot it to chroot into any unbootable Arch Linux installation on the system.
 
@@ -19,7 +21,7 @@ $ printf "hashed:%s\n" "$(openssl passwd -6)" > mkosi.rootpw
 $ chmod 600 mkosi.rootpw
 ```
 
-Note: Without this step you **cannot** login on the rescue image, so don't forget it.
+Note: Without this step you **cannot** log in on the rescue image, so don't forget it.
 Alternatively,
 
 - write `hashed:` to `mkosi.rootpw` to make `root` have an empty password, or
@@ -41,7 +43,7 @@ Then, put the image on your EFI partition (or on the XBOOTLDR partition if your 
 # install -m644 -t /efi/EFI/Linux mkosi.output/*.efi
 ```
 
-The image requires about 400MiB of space.
+The image requires about 400 MiB of space.
 
 ### Secure boot
 
