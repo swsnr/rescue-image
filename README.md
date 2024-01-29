@@ -12,7 +12,7 @@ With this image, you don't need to.  Put the image on your EFI, and boot it to c
 
 ## How?
 
-Make sure you have recent versions of `mkosi` and `system-ukify` installed.
+Make sure you have recent versions of `mkosi` and `systemd-ukify` installed.
 
 First, set a root password:
 
