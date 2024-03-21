@@ -43,7 +43,7 @@ Then, put the image on your EFI partition (or on the XBOOTLDR partition if your 
 # install -m644 -t /efi/EFI/Linux mkosi.output/*.efi
 ```
 
-The image requires about 400 MiB of space.
+The image requires about 215 MiB of space.
 
 ### Secure boot
 
