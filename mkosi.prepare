@@ -6,12 +6,16 @@
 set -euo pipefail
 
 case "$1" in
-    final)
-        echo "Saving supplemental iwlwifi firmware files"
-        # Save supplemental iwlwifi firmware files from mkosi's kernel module
-        # cleanup, see https://github.com/systemd/mkosi/issues/2334
-        rsync -mar --include '*/' --include 'iwlwifi-*.pnvm.*' --exclude '*' \
-            "${BUILDROOT}/usr/lib/firmware/" \
-            "${BUILDROOT}/usr/lib/saved-firmware"
-        ;;
+final)
+    echo "Saving supplemental iwlwifi firmware files"
+    # Save supplemental iwlwifi firmware files from mkosi's kernel module
+    # cleanup, see https://github.com/systemd/mkosi/issues/2334
+    #
+    # Once `modinfo -F firmware iwlwifi | rg pnvm` lists pvnm files on an Arch
+    # system, we can stop this dance, and also remove the restore code from
+    # mkosi.finalize.
+    rsync -mar --include '*/' --include 'iwlwifi-*.pnvm.*' --exclude '*' \
+        "${BUILDROOT}/usr/lib/firmware/" \
+        "${BUILDROOT}/usr/lib/saved-firmware"
+    ;;
 esac
