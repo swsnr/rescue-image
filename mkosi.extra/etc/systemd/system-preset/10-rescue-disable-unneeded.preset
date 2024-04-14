@@ -7,6 +7,3 @@ disable systemd-homed.service
 disable systemd-userdbd.socket
 # Leave the boot loader alone; the rescue image shouldn't touch anything by default
 disable systemd-boot-update.service
-
-# Enable wifi network manager
-enable iwd.service
