@@ -1,12 +1,13 @@
 # Rescue USI
 
-Build a minimal and opinionated rescue USI (UKI with embedded root filesystem).
+Build a minimal and opinionated rescue USI (unified kernel image with embedded root filesystem),
+i.e. a single EFI executable containing a minimal yet complete system for recovery.
 
 ## Why?
 
-If you tinker, things break.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
+You tinker, things break.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
 
-With this image, you don't need to.  Put the image on your EFI, and boot it rescue your Linux installation.
+With this image, you don't need to.  Put the image on your ESP, and boot it rescue your Linux installation.
 
 ## How?
 
@@ -28,12 +29,10 @@ Alternatively,
 Then, build the image:
 
 ```console
-$ mkosi --image-version="$(git rev-parse --short=10 HEAD)-(date --utc +%Y%m%d%H%M)"
+$ mkosi build
 ```
 
-You can pick whatever `image-version` you want as long as it helps you understand how and when you built the image.
-
-Note: If you did not set up user namespace, you have to run the above command as root.
+Note: If you did not set up user namespaces, you have to run the above command as root.
 
 Then, put the image on your EFI partition (or on the XBOOTLDR partition if your EFI system partition is too small):
 
@@ -41,7 +40,19 @@ Then, put the image on your EFI partition (or on the XBOOTLDR partition if your 
 # install -m644 -t /efi/EFI/Linux mkosi.output/*.efi
 ```
 
-The image requires about 215 MiB of space.
+If you place it in `EFI/Linux` systemd-boot will discover it automatically without further configuration.
+
+### Image version
+
+By default, mkosi reads the version of this image from the `mkosi.version` file; together with the distribution release
+version this helps you identify what rescue image you have.
+
+However, for a rolling release distribution which has no distribution release version, i.e. Archlinux specifically,
+you can chose an explicit image version to help identify the image contents:
+
+```console
+$ mkosi build --image-version="$(git rev-parse --short=10 HEAD)-(date --utc +%Y%m%d%H%M)"
+```
 
 ### Secure boot
 
