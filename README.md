@@ -1,14 +1,12 @@
-# Arch Rescue image
+# Rescue USI
 
-A mostly minimal and opinionated `mkosi` UKI image for use as rescue image for Arch Linux.
-
-See https://swsnr.de/archlinux-rescue-image-with-mkosi
+Build a minimal and opinionated rescue USI (UKI with embedded root filesystem).
 
 ## Why?
 
-Every once in a while Arch breaks.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
+If you tinker, things break.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
 
-With this image, you don't need to.  Put the image on your EFI, and boot it to chroot into any unbootable Arch Linux installation on the system.
+With this image, you don't need to.  Put the image on your EFI, and boot it rescue your Linux installation.
 
 ## How?
 
@@ -53,6 +51,9 @@ After installing the rescue image to `/efi` you can sign it for secure boot, e.g
 For this you need to set `SecureBootKey=` and `SecureBootCertificate=`, e.g in `mkosi.local.conf`.
 
 ### Customization
+
+By default, the image builds for the same distribution as the host, i.e. if you're running an Arch system it build an Arch image.
+You can customize this by setting the `Distribution` key in `mkosi.local.conf`.
 
 You can put additional options for `mkosi` into `mkosi.local.conf` which is ignored by git.
 You can also fork the repository and freely adapt the configuration to your own needs.

@@ -8,9 +8,14 @@ set -euo pipefail
 echo "Restoring supplemental iwlwifi firmware files"
 # See `mkosi.prepare` and https://github.com/systemd/mkosi/issues/2334
 rsync -mar "${BUILDROOT}/usr/lib/saved-firmware/" \
-            "${BUILDROOT}/usr/lib/firmware"
+    "${BUILDROOT}/usr/lib/firmware"
 rm -rf "${BUILDROOT}/usr/lib/saved-firmware/"
 
-echo "Finalizing /etc/os-release"
-source "${BUILDROOT}/etc/os-release"
-echo "PRETTY_NAME=\"${NAME} (${VARIANT} ${IMAGE_VERSION:-n/a})\"" >> "${BUILDROOT}/etc/os-release"
+case "${DISTRIBUTION}" in
+arch)
+    echo "Finalizing /etc/os-release"
+    source "${BUILDROOT}/etc/os-release"
+    echo "PRETTY_NAME=\"${NAME} (${VARIANT} ${IMAGE_VERSION:-n/a})\"" >>"${BUILDROOT}/etc/os-release"
+    ;;
+*) ;;
+esac
