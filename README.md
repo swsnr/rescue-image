@@ -51,7 +51,7 @@ However, for a rolling release distribution which has no distribution release ve
 you can chose an explicit image version to help identify the image contents:
 
 ```console
-$ mkosi build --image-version="$(git rev-parse --short=10 HEAD)-(date --utc +%Y%m%d%H%M)"
+$ mkosi --image-version="$(git rev-parse --short=10 HEAD)-$(date --utc +%Y%m%d%H%M)" build
 ```
 
 ### Secure boot
