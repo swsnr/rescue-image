@@ -1,2 +1,5 @@
-/mkosi.rootpw
-/mkosi.local.conf
+mkosi.local/
+mkosi.local.conf
+mkosi.crt
+mkosi.key
+mkosi.rootpw
