@@ -5,9 +5,9 @@ i.e. a single EFI executable containing a minimal yet complete system for recove
 
 ## Why?
 
-You tinker, things break.  They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
+You tinker, things break. They say every Arch Linux user carries a USB stick with the installation disk around, just in case.
 
-With this image, you don't need to.  Put the image on your ESP, and boot it rescue your Linux installation.
+With this image, you don't need to. Put the image on your ESP, and boot it rescue your Linux installation.
 
 ## How?
 
@@ -73,8 +73,9 @@ Refer to `mkosi(1)` for more information.
 
 ## License
 
-This code in this repository is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
+Copyright Sebastian Wiesner <sebastian@swsnr.de>
 
-Packages inside the generated rescue image are covered by their respective licenses.
+The code in this repository is licensed under the EUPL, see <https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12>.
+
+Packages inside the generated rescue image are covered by their respective licenses;
+as a result the final rescue image may be covered by a different license.
