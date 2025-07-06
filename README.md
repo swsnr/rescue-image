@@ -1,7 +1,6 @@
-# Rescue USI
+# Rescue Image
 
-Build a minimal and opinionated rescue USI (unified kernel image with embedded root filesystem),
-i.e. a single EFI executable containing a minimal yet complete system for recovery.
+Build a minimal and opinionated rescue unified system image (USI), i.e. a single EFI executable containing a minimal yet complete system for recovery.
 
 ## Why?
 
