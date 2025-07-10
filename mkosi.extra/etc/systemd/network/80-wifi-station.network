@@ -1,8 +1,1 @@
-# SPDX-License-Identifier: MIT-0
-
-[Match]
-Type=wlan
-WLANInterfaceType=station
-
-[Network]
-DHCP=yes
+80-wifi-station.network.example
