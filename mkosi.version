@@ -1,1 +1,2 @@
-1.4
+#!/usr/bin/bash
+printf "%s.r%s.%s" "$(date --utc +%Y%m%d%H%M)" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
