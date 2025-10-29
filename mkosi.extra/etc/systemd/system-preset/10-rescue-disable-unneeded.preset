@@ -10,3 +10,8 @@ disable systemd-homed-activate.service
 disable systemd-userdbd.socket
 # Leave the boot loader alone; the rescue image shouldn't touch anything by default
 disable systemd-boot-update.service
+# We don't do factory resets with the rescue image so disable some related services
+disable systemd-tpm2-clear.service
+# We don't have sysexts or confexts in the rescue image
+disable systemd-sysext.service
+disable systemd-confext.service
