@@ -1,1 +1,1 @@
-80-wifi-station.network.example
+/usr/lib/systemd/network/80-wifi-station.network.example
