@@ -7,14 +7,9 @@
 
 set -euo pipefail
 
-case "${DISTRIBUTION}" in
-arch)
-    echo "Updating manpage database"
-    makewhatis /usr/share/man
+echo "Updating manpage database"
+makewhatis /usr/share/man
 
-    echo "Populating pacman keyring"
-    pacman-key --init
-    pacman-key --populate
-    ;;
-*) ;;
-esac
+echo "Populating pacman keyring"
+pacman-key --init
+pacman-key --populate

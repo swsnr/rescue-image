@@ -8,15 +8,5 @@
 set -euo pipefail
 
 source "${BUILDROOT}/etc/os-release"
-case "${DISTRIBUTION}" in
-fedora)
-    echo "Setting variant in os-release"
-    echo 'VARIANT_ID=rescue' >>"${BUILDROOT}/etc/os-release"
-    echo 'VARIANT="Rescue Image"' >>"${BUILDROOT}/etc/os-release"
-    ;;
-*) ;;
-esac
-
-source "${BUILDROOT}/etc/os-release"
 echo "Finalizing os-release"
 echo "PRETTY_NAME=\"${NAME} (${VARIANT} ${IMAGE_VERSION:-n/a})\"" >>"${BUILDROOT}/etc/os-release"
