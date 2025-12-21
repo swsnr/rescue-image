@@ -60,16 +60,6 @@ After installing the rescue image to `/efi` you can sign it for secure boot, e.g
 `mkosi` can also sign the image by itself, using `sbsigntools`.
 For this you need to set `SecureBootKey=` and `SecureBootCertificate=`, e.g in `mkosi.local.conf`.
 
-### Customization
-
-By default, the image builds for the same distribution as the host, i.e. if you're running an Arch system it build an Arch image.
-You can customize this by setting the `Distribution` key in `mkosi.local.conf`.
-
-You can put additional options for `mkosi` into `mkosi.local.conf` which is ignored by git.
-You can also fork the repository and freely adapt the configuration to your own needs.
-
-Refer to `mkosi(1)` for more information.
-
 ## License
 
 Copyright Sebastian Wiesner <sebastian@swsnr.de>
