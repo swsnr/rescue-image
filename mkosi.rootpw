@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-set -euo pipefail
-openssl rand 15 | od -t x4 -An -w100 | xargs | tr ' [:lower:]' '-[:upper:]'
