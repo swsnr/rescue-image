@@ -41,18 +41,6 @@ Then, put the image on your EFI partition (or on the XBOOTLDR partition if your 
 
 If you place it in `EFI/Linux` systemd-boot will discover it automatically without further configuration.
 
-### Image version
-
-By default, mkosi reads the version of this image from the `mkosi.version` file; together with the distribution release
-version this helps you identify what rescue image you have.
-
-However, for a rolling release distribution which has no distribution release version, i.e. Archlinux specifically,
-you can chose an explicit image version to help identify the image contents:
-
-```console
-$ mkosi --image-version="$(git rev-parse --short=10 HEAD)-$(date --utc +%Y%m%d%H%M)" build
-```
-
 ### Secure boot
 
 After installing the rescue image to `/efi` you can sign it for secure boot, e.g. with `sbctl sign`.
