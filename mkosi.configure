@@ -40,13 +40,13 @@ def main() -> None:
     file mode which we cannot control in git, see <https://github.com/systemd/mkosi/issues/4083>.
     """
     config = json.load(sys.stdin)
-    if not config.get('root_password'):
+    if not config.get('RootPassword'):
         obs_root_password = read_hashed_password_on_obs()
         if obs_root_password:
             # If we're on OBS do not include host kmods, as they're from the OBS build VM and not really
             # relevant to a bare metal rescue image.
             config['KernelModulesIncludeHost'] = False
-        config['root_password'] = list(obs_root_password or generate_random_password())
+        config['RootPassword'] = list(obs_root_password or generate_random_password())
     json.dump(config, sys.stdout)
 
 
