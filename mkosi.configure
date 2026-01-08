@@ -4,6 +4,7 @@ import sys
 import json
 from pathlib import Path
 from secrets import token_hex
+from typing import Any, cast
 
 def read_hashed_password_on_obs() -> tuple[str, bool] | None:
     """Read a hashed password from sources on OBS.
@@ -39,7 +40,10 @@ def main() -> None:
     We deliberately do not use `mkosi.rootpw` because it is sensitive to the
     file mode which we cannot control in git, see <https://github.com/systemd/mkosi/issues/4083>.
     """
-    config = json.load(sys.stdin)
+    config = json.load(sys.stdin)  # pyright: ignore[reportAny]
+    if not isinstance(config, dict):
+        raise ValueError(f'Expected a map, got {config!r}')
+    config = cast(dict[str, Any], config)  # pyright: ignore[reportExplicitAny]
     if not config.get('RootPassword'):
         obs_root_password = read_hashed_password_on_obs()
         if obs_root_password:
