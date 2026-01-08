@@ -46,7 +46,7 @@ def main() -> None:
     config = cast(dict[str, Any], config)  # pyright: ignore[reportExplicitAny]
     if not config.get('RootPassword'):
         obs_root_password = read_hashed_password_on_obs()
-        print('Configuring build for OBS', sys.stderr)
+        print('Configuring build for OBS', file=sys.stderr)
         if obs_root_password:
             # If we're on OBS do not include host kmods, as they're from the OBS build VM and not really
             # relevant to a bare metal rescue image.
